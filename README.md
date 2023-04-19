@@ -1,4 +1,4 @@
-# Harness Python FF Loadtest
+# Harness FF Bulk Test
 
 Bulk evaluation of Harness Feature Flags for many targets to test bucketing.
 
@@ -29,6 +29,7 @@ export `HARNESS_FEATURE_FLAG`=custom_flag
    1. Default rule set to `false`
    1. When Disabled set to `false`
    1. Click `Add Targeting` > `Percentage Rollout` and choose the `generated users` Target Group
+      ![](./assets/flag.png)
 
 #### SDK Key
 
@@ -48,4 +49,15 @@ The application will stand up the Harness Feature Flag client and evaluate a fla
 
 The Identifier for target is between `generated-10000` and `generated-99999`.
 
-The `output.txt` file contains the Identifier and evaluation.
+### Ouput File
+
+The `output.txt` file is a CSV with the flag name, Identifier and evaluation result.
+
+### Log Files
+
+The SDK provides detailed logs about the evaluation of flags.
+
+- Targets being added to the generated_users segment
+- Targets are caught by the Target Group rule. Targets not matching this rule are served false by default.
+- Target is recognized to be evaluated against the Progressive Rollout rule
+- Target is given an evaluation and assigned to a bucket (e.g., "38")

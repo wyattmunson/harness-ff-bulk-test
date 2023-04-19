@@ -16,18 +16,18 @@ def main():
     # Create a Feature Flag Client
     client = CfClient(apiKey)
 
-    # Create a target (different targets can get different results based on rules.  This include a custom attribute 'location')
-    # target = Target(identifier='pythonSDK', name="PythonSDK", attributes={"location": "emea"})
-
     # Loop forever reporting the state of the flag
     while True:
         print("\n\nEVALUATING TARGET...")
+
         generated_id = generate_identifier()
         target = Target(identifier=generated_id, name=generated_id, attributes={"location": "us"})
         result = client.bool_variation(flagName, target, False)
+        
         log.info("Flag variation %s", result)
         write_to_file(flagName, generated_id, result)
-        time.sleep(2)
+        
+        time.sleep(1)
 
     close()
 
