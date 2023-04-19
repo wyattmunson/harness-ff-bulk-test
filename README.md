@@ -44,7 +44,7 @@ A minimum of one SDK is needed per environment. A minimum of two are needed to s
 python ./main.py
 ```
 
-The application will stand up the Harness Feature Flag client and evaluate a flag randomly generated target every second.
+The application will stand up the Harness Feature Flag client and evaluate a flag against a randomly generated target every second.
 
 ### Flag
 
