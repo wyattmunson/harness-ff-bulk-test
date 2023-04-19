@@ -24,7 +24,7 @@ export `HARNESS_FEATURE_FLAG`=custom_flag
 1. Create a Target Group in Harness called `generated users`
    1. Edit the `critera` box to update Targed based on condition
    1. Add a new rule where `Identifier` contains `generated`
-      !["./flag.png"](./assets/condition.png | width=100)
+      !["./flag.png"](./assets/condition.png)
 1. Create a boolean Feature Flag called `rolloutFlag`
    1. Default rule set to `false`
    1. When Disabled set to `false`
