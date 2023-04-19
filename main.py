@@ -10,7 +10,10 @@ import random
 apiKey = os.getenv('HARNESS_SDK_KEY', "export HARNESS_SDK_KEY varible")
 
 # Flag Name
-flagName = os.getenv('FF_FLAG_NAME', "rolloutFlag")
+flagName = os.getenv('HARNESS_FLAG_NAME', "rolloutFlag")
+idMin = os.getenv('HARNESS_ID_MIN', 10000)
+idMax = os.getenv('HARNESS_ID_MAX', 99999)
+
 
 def main():    
     # Create a Feature Flag Client
@@ -24,7 +27,7 @@ def main():
         target = Target(identifier=generated_id, name=generated_id, attributes={"location": "us"})
         result = client.bool_variation(flagName, target, False)
         
-        log.info("Flag variation %s", result)
+        log.info("\nFLAG VARIATION: %s", result)
         write_to_file(flagName, generated_id, result)
         
         time.sleep(1)
@@ -33,7 +36,7 @@ def main():
 
 
 def generate_identifier():
-    identifier = random.randint(10000, 99999)
+    identifier = random.randint(idMin, idMax)
     identifier = "generated-" + str(identifier)
     return identifier
 

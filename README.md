@@ -13,10 +13,9 @@ Export a variable called `HARNESS_SDK_KEY`. See details below to generate.
 export `HARNESS_SDK_KEY`=XXXXXXXX_XXXXX_XXXXXX_XXXXXXXXX
 
 # optional variables
-
 export `HARNESS_FEATURE_FLAG`=custom_flag
-export `HARNESS_FEATURE_FLAG`=custom_flag
-
+export `HARNESS_ID_MIN`=1
+export `HARNESS_ID_MAX`=500
 ```
 
 ### Harness Configuration
@@ -47,7 +46,17 @@ python ./main.py
 
 The application will stand up the Harness Feature Flag client and evaluate a flag randomly generated target every second.
 
-The Identifier for target is between `generated-10000` and `generated-99999`.
+### Flag
+
+The default flag is `rolloutFlag`. If this flag does not exist in the corresponding Harness account, the evaulations will fail and return the default value: `false`.
+
+Override the default flag with `HARNESS_FEATURE_FLAG` environment variable.
+
+### Identifier
+
+The Identifier for the randomly generated targets is between `generated-10000` and `generated-99999`.
+
+The numerical limits can be overridden with the `HARNESS_ID_MIN` and `HARNESS_ID_MAX` environment variables.
 
 ### Ouput File
 
@@ -57,7 +66,6 @@ The `output.txt` file is a CSV with the flag name, Identifier and evaluation res
 
 The SDK provides detailed logs about the evaluation of flags.
 
-- Targets being added to the generated_users segment
-- Targets are caught by the Target Group rule. Targets not matching this rule are served false by default.
-- Target is recognized to be evaluated against the Progressive Rollout rule
+- Targets being added to the generated_users segment as defined in the Target Group rule
+- Targets is recognized as part of the Progressive Rollout targeting in the Flag targeting. The target recieves a variation of the rule based on the target weighting.
 - Target is given an evaluation and assigned to a bucket (e.g., "38")
